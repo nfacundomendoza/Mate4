@@ -11,24 +11,35 @@ Para mantener las dependencias organizadas se utiliza un **entorno virtual** con
    ```bash
    git clone <URL_DEL_REPO>
    cd Mate4
+   ```
 2. Instalar el paquete venv:
     ```bash
     sudo apt update
     sudo apt install python3.12-venv -y
+    ```
 3. Crear entorno:
     ```bash
     python3 -m venv venv
+    ```
 4. Activar entorno: 
     - Linux:
         ```bash
         source venv/bin/activate
+        ```
     - Windows:
         ```cmd
         .\venv\Scripts\Activate.ps1
+        ```
 5. Instalar dependencias:
     ```bash
     pip install -r requirements.txt
-
+    ```
 ## Para desacativar el entorno:
     deactivate
+
+# Ejecutar archivo python "regresion lineal": 
+`python regresion-lineal.py`
+
+# Ejecutar archivo python "grafico-dispersion": 
+`streamlit run grafico-dispersion.py`
 
