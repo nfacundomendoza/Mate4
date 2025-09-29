@@ -1,0 +1,22 @@
+# Ignorar entorno virtual
+venv/
+
+# Archivos de Python compilados
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Configuración local
+*.env
+.env
+
+# Archivos de logs
+*.log
+
+# Configuración de Jupyter
+.ipynb_checkpoints/
+
+# Archivos de sistemas operativos
+.DS_Store
+Thumbs.db
