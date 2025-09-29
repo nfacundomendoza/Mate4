@@ -20,3 +20,6 @@ __pycache__/
 # Archivos de sistemas operativos
 .DS_Store
 Thumbs.db
+
+# resultados
+*.txt

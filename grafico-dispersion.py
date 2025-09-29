@@ -10,5 +10,8 @@ predictoras = ["fixed acidity", "volatile acidity", "citric acid",
 st.title("Gráfico de dispersión interactivo")
 
 col_seleccionada = st.selectbox("Seleccionar variable predictora", predictoras)
+
+# La variable Y es la variable respuesta
+
 fig = px.scatter(ds, x=col_seleccionada, y="residual sugar", trendline="ols")
 st.plotly_chart(fig)

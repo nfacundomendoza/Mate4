@@ -37,9 +37,9 @@ Para mantener las dependencias organizadas se utiliza un **entorno virtual** con
 ## Para desacativar el entorno:
     deactivate
 
-# Ejecutar archivo python "regresion lineal": 
-`python regresion-lineal.py`
+## Ejecutar archivo python "regresion lineal" y guardar los resultados en un .txt: 
+`python regresion-lineal.py > resultados.txt`
 
-# Ejecutar archivo python "grafico-dispersion": 
+## Ejecutar archivo python "grafico-dispersion": 
 `streamlit run grafico-dispersion.py`
 
