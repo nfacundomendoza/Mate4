@@ -8,23 +8,47 @@ pd.set_option('display.max_rows', None)
 pd.set_option('display.width', 1000)
 pd.set_option('display.float_format', '{:.4f}'.format)  
 
-ds = pd.read_csv("winequality-red.csv", sep=';', quotechar='"')
-ds.columns = ds.columns.str.strip()
+# Cargar dataset
+ds = pd.read_csv("eficiencia_energetica.csv")
 
-Y = ds["quality"]
+# Renombrar columnas para mayor claridad
+ds.rename(columns={
+    "X1": "Relative Compactness",
+    "X2": "Surface Area",
+    "X3": "Wall Area",
+    "X4": "Roof Area",
+    "X5": "Overall Height",
+    "X6": "Orientation",
+    "X7": "Glazing Area",
+    "X8": "Glazing Area Distribution",
+    "Año 1": "Heating Load"
+}, inplace=True)
 
-predictoras = ["fixed acidity", "volatile acidity", "citric acid", "residual sugar",
-               "chlorides", "free sulfur dioxide", "total sulfur dioxide",
-               "density", "pH", "sulphates", "alcohol"] 
+# Variable respuesta
+Y = ds["Heating Load"]
+
+# Variables predictoras
+predictoras = [
+    "Relative Compactness",
+    "Surface Area",
+    "Wall Area",
+    "Roof Area",
+    "Overall Height",
+    "Orientation",
+    "Glazing Area",
+    "Glazing Area Distribution"
+] 
 
 resultados = []
 
 for col in predictoras:
     X = ds[[col]]
 
+    # Modelo con sklearn
     modelo = LinearRegression()
     modelo.fit(X, Y)
     
+    # Modelo con statsmodels para IC
     X_const = sm.add_constant(X)
     modelo_sm = sm.OLS(Y, X_const).fit()
     
@@ -32,6 +56,7 @@ for col in predictoras:
     summary_frame = pred.summary_frame(alpha=0.05)
 
     sigma2 = np.sum((Y - modelo.predict(X))**2) / (len(Y) - 2)
+    
     resultados.append({
         "Variable": col,
         "Intercepto (β0)": round(modelo.intercept_, 4),
@@ -47,7 +72,6 @@ for col in predictoras:
         "IC predicción inferior": round(summary_frame['obs_ci_lower'].iloc[0], 4),
         "IC predicción superior": round(summary_frame['obs_ci_upper'].iloc[0], 4)
     })
-
 
 tabla_resultados = pd.DataFrame(resultados)
 
