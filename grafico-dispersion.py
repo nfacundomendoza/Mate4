@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# Cargar dataset de eficiencia energética
-ds = pd.read_csv("eficiencia_energetica.csv")
+# Cargar dataset de eficiencia energética desde el Excel
+ds = pd.read_excel("ENB2012_data.xlsx")
 
-# Renombrar columnas para que sean descriptivas y fáciles de usar
+# Renombrar columnas para que sean descriptivas
 ds.rename(columns={
     "X1": "Relative Compactness",
     "X2": "Surface Area",
@@ -15,10 +15,11 @@ ds.rename(columns={
     "X6": "Orientation",
     "X7": "Glazing Area",
     "X8": "Glazing Area Distribution",
-    "Año 1": "Heating Load"
+    "Y1": "Heating Load",
+    "Y2": "Cooling Load"
 }, inplace=True)
 
-# Lista de variables predictoras con nombres descriptivos
+# Lista de variables predictoras
 predictoras = [
     "Relative Compactness",
     "Surface Area",
@@ -32,7 +33,7 @@ predictoras = [
 
 st.title("Gráfico de dispersión interactivo - Eficiencia Energética")
 
-# Selección de la variable predictora
+# Selección de variable predictora
 col_seleccionada = st.selectbox("Seleccionar variable predictora", predictoras)
 
 # Variable respuesta

@@ -8,8 +8,8 @@ pd.set_option('display.max_rows', None)
 pd.set_option('display.width', 1000)
 pd.set_option('display.float_format', '{:.4f}'.format)  
 
-# Cargar dataset
-ds = pd.read_csv("eficiencia_energetica.csv")
+# Cargar dataset desde Excel
+ds = pd.read_excel("ENB2012_data.xlsx")
 
 # Renombrar columnas para mayor claridad
 ds.rename(columns={
@@ -21,7 +21,7 @@ ds.rename(columns={
     "X6": "Orientation",
     "X7": "Glazing Area",
     "X8": "Glazing Area Distribution",
-    "Año 1": "Heating Load"
+    "Y1": "Heating Load"
 }, inplace=True)
 
 # Variable respuesta
@@ -57,23 +57,28 @@ for col in predictoras:
 
     sigma2 = np.sum((Y - modelo.predict(X))**2) / (len(Y) - 2)
     
+    # Agregar resultados para cada predictor
     resultados.append({
         "Variable": col,
-        "Intercepto (β0)": round(modelo.intercept_, 4),
-        "Coeficiente (β1)": round(modelo.coef_[0], 4),
+        "Intercepto (beta0)": round(modelo.intercept_, 4),
+        "Coeficiente (beta1)": round(modelo.coef_[0], 4),
         "R²": round(modelo.score(X, Y), 4),
-        "σ²": round(sigma2, 4),
-        "IC β0_inferior": round(modelo_sm.conf_int().loc['const'][0], 4),
-        "IC β0_superior": round(modelo_sm.conf_int().loc['const'][1], 4),
-        "IC β1_inferior": round(modelo_sm.conf_int().loc[col][0], 4),
-        "IC β1_superior": round(modelo_sm.conf_int().loc[col][1], 4),
+        "sigma2": round(sigma2, 4),
+        "IC beta0_inferior": round(modelo_sm.conf_int().loc['const'][0], 4),
+        "IC beta0_superior": round(modelo_sm.conf_int().loc['const'][1], 4),
+        "IC beta1_inferior": round(modelo_sm.conf_int().loc[col][0], 4),
+        "IC beta1_superior": round(modelo_sm.conf_int().loc[col][1], 4),
         "IC media inferior": round(summary_frame['mean_ci_lower'].iloc[0], 4),
         "IC media superior": round(summary_frame['mean_ci_upper'].iloc[0], 4),
         "IC predicción inferior": round(summary_frame['obs_ci_lower'].iloc[0], 4),
         "IC predicción superior": round(summary_frame['obs_ci_upper'].iloc[0], 4)
     })
 
+# Crear DataFrame final
 tabla_resultados = pd.DataFrame(resultados)
 
-print("\nResumen regresiones lineales simples probando todos los parámetros:\n")
-print(tabla_resultados)
+# Guardar resultados en archivo UTF-8 para evitar errores de codificación
+tabla_resultados.to_csv(r"C:\Mate4\Mate4\resultados.txt", index=False, encoding="utf-8")
+
+
+print("✅ Resultados guardados en 'resultados.txt'")
