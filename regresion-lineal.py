@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 import statsmodels.api as sm
+import os
 from sklearn.linear_model import LinearRegression
 
 # Cargar dataset Iris
@@ -109,8 +110,25 @@ for idx, row in tabla_resultados.iterrows():
     st.write(f"- {row['Variable']}: {row['R²']}")
 
 # Guardar resultados en archivo
-tabla_resultados.to_csv("resultados_iris_corregidos.csv", index=False, encoding="utf-8")
-st.success("✅ Resultados guardados en 'resultados_iris_corregidos.csv'")
+archivo_resultados = "resultados.txt"
+
+# Borrar archivo anterior si existe
+if os.path.exists(archivo_resultados):
+    try:
+        os.remove(archivo_resultados)
+    except PermissionError:
+        print(f"No se pudo borrar {archivo_resultados}. Cierra el archivo si está abierto y vuelve a ejecutar.")
+        raise
+
+# Guardar resultados
+tabla_resultados.to_csv(archivo_resultados, index=False, encoding="utf-8")
+print(f"Resultados guardados en '{archivo_resultados}'")
+
+# También guardar CSV corregido
+archivo_csv = "resultados_iris_corregidos.csv"
+tabla_resultados.to_csv(archivo_csv, index=False, encoding="utf-8")
+print(f"Resultados guardados en '{archivo_csv}'")
+
 
 # Mostrar resumen estadístico
 st.subheader("Resumen Estadístico del Dataset")
