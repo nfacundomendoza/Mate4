@@ -78,7 +78,7 @@ for col in predictoras:
 tabla_resultados = pd.DataFrame(resultados)
 
 # Guardar resultados en archivo UTF-8 para evitar errores de codificación
-tabla_resultados.to_csv(r"C:\Mate4\Mate4\resultados.txt", index=False, encoding="utf-8")
+tabla_resultados.to_csv(r"resultados.txt", index=False, encoding="utf-8")
 
 
 print("✅ Resultados guardados en 'resultados.txt'")
