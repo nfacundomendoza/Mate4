@@ -125,7 +125,7 @@ tabla_resultados.to_csv(archivo_resultados, index=False, encoding="utf-8")
 print(f"Resultados guardados en '{archivo_resultados}'")
 
 # También guardar CSV corregido
-archivo_csv = "resultados_iris_corregidos.csv"
+archivo_csv = "resultados.csv"
 tabla_resultados.to_csv(archivo_csv, index=False, encoding="utf-8")
 print(f"Resultados guardados en '{archivo_csv}'")
 
