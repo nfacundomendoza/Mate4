@@ -1,0 +1,4 @@
+Variable,Intercepto (beta0),Coeficiente (beta1),R²,sigma2,IC beta0_inferior,IC beta0_superior,IC beta1_inferior,IC beta1_superior,IC media inferior,IC media superior,IC predicción inferior,IC predicción superior
+sepal_length,-7.0954,1.8575,0.76,0.7524,-8.0961,-6.0947,1.6879,2.0271,3.6187,3.8986,2.0389,5.4784
+sepal_width,8.9847,-1.7112,0.1768,2.58,7.1349,10.8345,-2.3109,-1.1115,3.4995,4.0178,0.574,6.9433
+petal_width,1.0906,2.2259,0.9269,0.2291,0.9464,1.2347,2.1243,2.3274,3.6814,3.8359,2.8096,4.7077
