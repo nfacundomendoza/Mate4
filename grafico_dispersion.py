@@ -13,9 +13,9 @@ ds = pd.read_csv("iris.data", header=None, names=[
 # Lista de variables predictoras
 predictoras = ["sepal_length", "sepal_width", "petal_width"]
 
-st.title("📊 Análisis de Regresión Lineal Simple - Iris Dataset")
+st.title("Análisis de Regresión Lineal Simple")
 
-# Sidebar para controles
+# Sidebar
 st.sidebar.header("Configuración del Análisis")
 
 # Selección de variable predictora
@@ -28,7 +28,7 @@ col_seleccionada = st.sidebar.selectbox(
 # Variable respuesta
 y_variable = "petal_length"
 
-# Mostrar información del dataset
+# información del dataset
 st.sidebar.subheader("Información del Dataset")
 st.sidebar.write(f"**Total de observaciones:** {len(ds)}")
 st.sidebar.write(f"**Variable respuesta:** {y_variable}")
@@ -40,7 +40,7 @@ st.sidebar.write("**Estadísticas descriptivas:**")
 st.sidebar.write(f"Media {col_seleccionada}: {stats[col_seleccionada]['mean']:.2f}")
 st.sidebar.write(f"Media {y_variable}: {stats[y_variable]['mean']:.2f}")
 
-# Crear pestañas para diferentes visualizaciones
+# pestañas
 tab1, tab2, tab3 = st.tabs(["📈 Gráfico de Dispersión", "📋 Resultados Estadísticos", "🔍 Análisis de Residuos"])
 
 with tab1:
@@ -49,7 +49,7 @@ with tab1:
         ds,
         x=col_seleccionada,
         y=y_variable,
-        color="class",  # Color por especie
+        color="class",
         trendline="ols",
         labels={
             col_seleccionada: f"{col_seleccionada} (cm)",
@@ -74,7 +74,8 @@ with tab1:
         xref="paper", yref="paper",
         text=f"Correlación: {correlacion:.3f}",
         showarrow=False,
-        bgcolor="white",
+        bgcolor="black",
+        font=dict(color="white"),
         bordercolor="black",
         borderwidth=1
     )
@@ -166,16 +167,18 @@ with tab3:
     fig_hist.update_layout(height=400)
     st.plotly_chart(fig_hist, use_container_width=True)
 
-# Información adicional
-st.sidebar.markdown("---")
-st.sidebar.subheader("💡 Acerca del Análisis")
-st.sidebar.info(
-    "Este análisis muestra la relación lineal entre el largo del pétalo "
-    "y otras variables morfológicas de las flores Iris. "
-    "Use las pestañas para explorar diferentes aspectos del modelo."
-)
+#st.sidebar.markdown("---")
 
-# Mostrar datos raw si el usuario lo desea
+# Mostrar datos brutos
 if st.sidebar.checkbox("Mostrar datos brutos"):
     st.subheader("📄 Datos del Dataset Iris")
     st.dataframe(ds, use_container_width=True)
+
+
+# Información adicional
+#with st.sidebar.expander("💡 Acerca del Análisis"):
+#    st.write("""
+#    Este análisis muestra la relación lineal entre el largo del pétalo 
+#    y otras variables morfológicas de las flores Iris. 
+#    Use las pestañas para explorar diferentes aspectos del modelo.
+#    """)

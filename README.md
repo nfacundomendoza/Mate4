@@ -38,7 +38,7 @@ Para mantener las dependencias organizadas se utiliza un **entorno virtual** con
     deactivate
 
 ## Ejecutar archivo python "regresion lineal" y guardar los resultados en un .txt: 
-`python regresion-lineal.py`
+`streamlit run regresion-lineal.py`
 
 ## Ejecutar archivo python "grafico-dispersion": 
 `streamlit run grafico-dispersion.py`

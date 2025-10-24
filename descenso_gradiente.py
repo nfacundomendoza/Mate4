@@ -15,7 +15,7 @@ class LinearRegressionGD:
         self.weights = np.zeros(n_features)
         self.bias = 0
         
-        print("🔄 Ejecutando Descenso del Gradiente...")
+        print("Ejecutando Descenso del Gradiente...")
         for i in range(self.n_iter):
             # Predicciones
             y_pred = np.dot(X, self.weights) + self.bias
@@ -39,15 +39,13 @@ class LinearRegressionGD:
     def predict(self, X):
         return np.dot(X, self.weights) + self.bias
 
-# 1. CARGAR DATOS
-print("📁 Cargando dataset Iris...")
+# Cargar datos
+print("Cargando datos del dataset")
 ds = pd.read_csv("iris.data", header=None, names=[
     "sepal_length", "sepal_width", "petal_length", "petal_width", "class"
 ])
 print(f"Dataset cargado: {len(ds)} registros")
 
-# 2. PREPARAR DATOS
-print("\n🔧 Preparando datos para regresión múltiple...")
 X = ds[["sepal_length", "sepal_width", "petal_width"]].values
 y = ds["petal_length"].values
 
@@ -57,8 +55,7 @@ print("- sepal_width  (x₂)")
 print("- petal_width  (x₃)")
 print(f"Variable respuesta: petal_length (Y)")
 
-# 3. NORMALIZAR CARACTERÍSTICAS (importante para Descenso del Gradiente)
-print("\n📊 Normalizando características...")
+# Normalizar características
 X_mean = X.mean(axis=0)
 X_std = X.std(axis=0)
 X_normalized = (X - X_mean) / X_std
@@ -66,35 +63,35 @@ X_normalized = (X - X_mean) / X_std
 print("Medias antes de normalizar:", X_mean)
 print("Desviaciones estándar:", X_std)
 
-# 4. ENTRENAR CON DESCENSO DEL GRADIENTE
-print("\n🎯 Entrenando modelo con Descenso del Gradiente...")
+# Entrenar modelo con Descenso del Gradiente
+print("\n Entrenando modelo con Descenso del Gradiente...")
 modelo_gd = LinearRegressionGD(learning_rate=0.01, n_iter=1000)
 modelo_gd.fit(X_normalized, y)
 
-# 5. DESNORMALIZAR COEFICIENTES PARA INTERPRETACIÓN
-print("\n🔄 Desnormalizando coeficientes...")
+# Desnormalizar coeficientes
+print("\n Desnormalizando coeficientes...")
 coef_desnormalizados = modelo_gd.weights / X_std
 intercepto_desnormalizado = modelo_gd.bias - np.sum(coef_desnormalizados * X_mean)
 
-# 6. MOSTRAR RESULTADOS FINALES
+# Resultados finales
 print("\n" + "="*60)
-print("📈 RESULTADOS FINALES - DESCENSO DEL GRADIENTE")
+print("Resultados finales del modelo de regresión múltiple:")
 print("="*60)
-print(f"ECUACIÓN DE REGRESIÓN MÚLTIPLE:")
+print(f"Ecuación de regresión multiple:")
 print(f"petal_length = {intercepto_desnormalizado:.4f} + ")
 print(f"               ({coef_desnormalizados[0]:.4f} × sepal_length) + ")
 print(f"               ({coef_desnormalizados[1]:.4f} × sepal_width) + ")
 print(f"               ({coef_desnormalizados[2]:.4f} × petal_width)")
 
-print(f"\n📊 Coeficientes finales:")
+print(f"\nCoeficientes finales:")
 print(f"β₀ (Intercepto): {intercepto_desnormalizado:.4f}")
 print(f"β₁ (sepal_length): {coef_desnormalizados[0]:.4f}")
 print(f"β₂ (sepal_width): {coef_desnormalizados[1]:.4f}")
 print(f"β₃ (petal_width): {coef_desnormalizados[2]:.4f}")
 
-print(f"\n📉 Pérdida final (MSE): {modelo_gd.loss_history[-1]:.6f}")
+print(f"\nPérdida final (MSE): {modelo_gd.loss_history[-1]:.6f}")
 
-# 7. GRÁFICO DE CONVERGENCIA (opcional)
+# Gráfico de convergencia
 plt.figure(figsize=(10, 6))
 plt.plot(modelo_gd.loss_history)
 plt.title('Convergencia del Descenso del Gradiente')
@@ -103,4 +100,4 @@ plt.ylabel('Pérdida (MSE)')
 plt.grid(True)
 plt.show()
 
-print("\n✅ Descenso del Gradiente completado exitosamente!")
+print("\n Descenso del Gradiente completado")
