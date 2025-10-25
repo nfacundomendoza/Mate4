@@ -16,7 +16,6 @@ st.title("🌸 Regresión Múltiple (Mínimos Cuadrados)")
 ds = pd.read_csv("iris.data", header=None, names=[
     "sepal_length", "sepal_width", "petal_length", "petal_width", "class"
 ])
-st.subheader("Dataset Iris")
 
 # Variables
 predictoras = ["sepal_length", "sepal_width", "petal_width"]

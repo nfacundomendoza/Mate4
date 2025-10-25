@@ -28,7 +28,7 @@ class LinearRegressionGD:
         return np.dot(X, self.weights) + self.bias
 
 st.set_page_config(
-    page_title="Regresión Lineal Descenso Gradiente",
+    page_title="Descenso Gradiente",
     page_icon="🌸",
     layout="wide"
 )
