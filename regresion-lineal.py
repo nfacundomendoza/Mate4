@@ -60,13 +60,15 @@ for col in predictoras:
     X_const = sm.add_constant(X)
     modelo_sm = sm.OLS(Y, X_const).fit()
     sigma2 = modelo_sm.mse_resid
+    r = ds[col].corr(Y)
 
     resultados.append({
         "Variable": col,
-        "Intercepto (β₀)": modelo_sm.params['const'],
-        "Coeficiente (β₁)": modelo_sm.params[col],
+        "σ²": sigma2,
         "R²": modelo_sm.rsquared,
-        "σ²": sigma2
+        "r": r
+        "Coeficiente (β₁)": modelo_sm.params[col],
+        "Intercepto (β₀)": modelo_sm.params['const'],
     })
 
 tabla_resultados = pd.DataFrame(resultados)
