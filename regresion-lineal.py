@@ -58,6 +58,7 @@ resultados = []
 for col in predictoras:
     X = ds[[col]]
     X_const = sm.add_constant(X)
+    X_mean = X[col].mean()
     modelo_sm = sm.OLS(Y, X_const).fit()
     sigma2 = modelo_sm.mse_resid
     r = ds[col].corr(Y)
@@ -73,7 +74,8 @@ for col in predictoras:
         "Coeficiente (β₁)": modelo_sm.params[col],
         "Intercepto (β₀)": modelo_sm.params['const'],
         "IC(β1)": B1_ci,
-        "IC(β₀)": B0_ci
+        "IC(β₀)": B0_ci,
+        "Media X": X_mean, 
     })
 
 tabla_resultados = pd.DataFrame(resultados)
