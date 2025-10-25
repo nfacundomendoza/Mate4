@@ -33,7 +33,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("Descenso del Gradiente")
+st.title("🌸 Regresión Múltiple (Descenso del Gradiente)")
 
 # Dataset
 ds = pd.read_csv("iris.data", header=None, names=[
