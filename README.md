@@ -65,7 +65,7 @@ deactivate
 | Script                  | Descripción                                    | Comando                               |
 | ----------------------- | ---------------------------------------------- | ------------------------------------- |
 | `regresion-lineal.py`   | Regresión lineal | `streamlit run regresion-lineal.py`   |
-| `minimo-cuadrados.py`   | Regresión múltiple con mínimos cuadrados                   | `streamlit run minimo-cuadrados.py`   |
+| `minimo-cuadrados.py`   | Regresión múltiple con mínimos cuadrados | `streamlit run minimo-cuadrados.py`   |
 | `descenso-gradiente.py` | Regresión múltiple con descenso del gradiente  | `streamlit run descenso-gradiente.py` |
 | `comparacion.py`        | Comparación entre regresión simple y múltiple  | `streamlit run comparacion.py`        |
 
