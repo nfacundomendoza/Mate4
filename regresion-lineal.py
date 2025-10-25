@@ -61,14 +61,19 @@ for col in predictoras:
     modelo_sm = sm.OLS(Y, X_const).fit()
     sigma2 = modelo_sm.mse_resid
     r = ds[col].corr(Y)
+    conf = modelo_sm.conf_int() 
+    B0_ci = conf.loc['const'].tolist() 
+    B1_ci = conf.loc[col].tolist()     
 
     resultados.append({
         "Variable": col,
         "σ²": sigma2,
         "R²": modelo_sm.rsquared,
-        "r": r
+        "r": r,
         "Coeficiente (β₁)": modelo_sm.params[col],
         "Intercepto (β₀)": modelo_sm.params['const'],
+        "IC(β1)": B1_ci,
+        "IC(β₀)": B0_ci
     })
 
 tabla_resultados = pd.DataFrame(resultados)
